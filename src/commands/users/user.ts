@@ -137,7 +137,7 @@ module.exports = {
 			const winRatioString = (winRatio * 100).toFixed(3);
 			// there is data, now parse it
 			await interaction.reply(
-				`${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} ${easyRankString}** ST-SP: **${standardSingleString} ${standardRankString}**\nMP: **${winRatioString}%** (${addCommas(
+				`${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}%** (${addCommas(
 					multiWins
 				)}/${addCommas(multiPlays)})`
 			);
