@@ -39,6 +39,9 @@ function getLevel(experiencePoints: number | undefined) {
 }
 
 function addCommas(x: any) {
+	if (typeof x === "undefined") {
+		return undefined;
+	}
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -110,36 +113,44 @@ module.exports = {
 			const level = addCommas(
 				getLevel(stats.totalExperiencePoints).level
 			);
-			const formattedEXP = addCommas(stats.totalExperiencePoints);
+			const formattedEXP = addCommas(stats.totalExperiencePoints ?? 0);
 			const joinDateString = formatJoinDate(data.creationDateAndTime);
 			const rankString = getRank(data.membership);
 			// scores - singleplayer
 			const easySingleString =
 				addCommas(
-					stats.personalBestScoreOnEasySingleplayerMode.score
+					stats?.personalBestScoreOnEasySingleplayerMode?.score
 				) ?? "N/A";
 			const standardSingleString =
 				addCommas(
-					stats.personalBestScoreOnStandardSingleplayerMode.score
+					stats?.personalBestScoreOnStandardSingleplayerMode?.score
 				) ?? "N/A";
-			const easyRankString = stats.personalBestScoreOnEasySingleplayerMode
-				.globalRank
-				? `(#${stats.personalBestScoreOnEasySingleplayerMode.globalRank})`
+			const easyRankString = stats
+				?.personalBestScoreOnEasySingleplayerMode?.globalRank
+				? `(#${stats?.personalBestScoreOnEasySingleplayerMode?.globalRank})`
 				: "";
 			const standardRankString = stats
-				.personalBestScoreOnStandardSingleplayerMode.globalRank
-				? `(#${stats.personalBestScoreOnStandardSingleplayerMode.globalRank})`
+				?.personalBestScoreOnStandardSingleplayerMode?.globalRank
+				? `(#${stats?.personalBestScoreOnStandardSingleplayerMode?.globalRank})`
 				: "";
 			// scores - multiplayer
-			const multiWins = stats.multiplayer.gamesWon;
-			const multiPlays = stats.multiplayer.gamesPlayed;
-			const winRatio = multiPlays === 0 ? 0 : multiWins / multiPlays;
-			const winRatioString = (winRatio * 100).toFixed(3);
+			const multiWins = stats?.multiplayer?.gamesWon;
+			const multiPlays = stats?.multiplayer?.gamesPlayed;
+			const winRatio =
+				multiPlays === 0 || typeof multiPlays === "undefined"
+					? null
+					: multiWins / multiPlays;
+			const winRatioString =
+				typeof winRatio === "number"
+					? `${(winRatio * 100).toFixed(3)}%`
+					: "N/A";
+			const multiString =
+				typeof winRatio === "number"
+					? `(${multiWins}/${multiPlays})`
+					: "";
 			// there is data, now parse it
 			await interaction.reply(
-				`${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}%** (${addCommas(
-					multiWins
-				)}/${addCommas(multiPlays)})`
+				`${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}** ${multiString}`
 			);
 		} catch (error: any) {
 			await interaction.reply(
