@@ -48,22 +48,22 @@ function addCommas(x: any) {
 function getRank(membership: any) {
 	// TODO: Refactor this stupid thing already
 	if (membership?.isDeveloper) {
-		return "[D]";
+		return "Developer";
 	}
 	if (membership?.isAdministrator) {
-		return "[A]";
+		return "Administrator";
 	}
 	if (membership?.isModerator) {
-		return "[M]";
+		return "Moderator";
 	}
 	if (membership?.isContributor) {
-		return "[C]";
+		return "Contributor";
 	}
 	if (membership?.isTester) {
-		return "[T]";
+		return "Tester";
 	}
 	if (membership?.isDonator) {
-		return "[$]";
+		return "Donator";
 	}
 	// No rank
 	return "";
