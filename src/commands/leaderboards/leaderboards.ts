@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
+import _ from "lodash";
 
 function addCommas(x: any) {
 	if (typeof x === "undefined") {
@@ -10,7 +11,7 @@ function addCommas(x: any) {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatLeaderboardsString(data: any) {
+function formatLeaderboardsString(data: any, mode: string) {
 	let rankPadding = data.length >= 10 ? 1 : 0;
 	let usernamePadding = data
 		.map((element: any) => element.username.length)
@@ -19,8 +20,8 @@ function formatLeaderboardsString(data: any) {
 		.map((element: any) => addCommas(element.statistics.score).length)
 		.reduce((a: number, b: number) => Math.max(a, b), -Infinity);
 	// create string
-	let string = `\`\`\`ansi\n`;
-	for (let i = 0; i < data.length; i++) {
+	let string = `${_.startCase(mode)} Singleplayer Leaderboards\n\`\`\`ansi\n`;
+	for (let i = 0; i < Math.min(data.length, 25); i++) {
 		const rank = `#${i + 1}`.padStart(rankPadding, " ");
 		const username = `${data[i].username}`.padEnd(usernamePadding, " ");
 		const score = `${addCommas(data[i].statistics.score)}`.padStart(
@@ -30,6 +31,9 @@ function formatLeaderboardsString(data: any) {
 		string += `${rank} ${username} ${score}\n`;
 	}
 	string += `\`\`\``;
+	if (data.length > 25) {
+		string += `\nOnly Top 25 shown.`;
+	}
 	return string;
 }
 
@@ -66,7 +70,7 @@ module.exports = {
 			);
 			return;
 		}
-		await interaction.reply(formatLeaderboardsString(data));
+		await interaction.reply(formatLeaderboardsString(data, mode));
 		return;
 	},
 };
