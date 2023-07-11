@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
@@ -49,7 +49,7 @@ module.exports = {
 				.setMaxLength(20)
 				.setMinLength(3)
 		),
-	async execute(interaction: any) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const mode = interaction.options.getString("mode");
 		// test if username is valid.
 		if (mode !== "easy" && mode !== "standard") {

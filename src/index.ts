@@ -11,7 +11,18 @@ import { configuration } from "./configuration";
 import { log } from "./log";
 require("dotenv").config({});
 
-const client: any = new Client({ intents: [GatewayIntentBits.Guilds] });
+class BotClient extends Client {
+	public commands: Collection<string, any>;
+
+	constructor(options: any) {
+		super(options);
+		this.commands = new Collection();
+	}
+}
+
+const client: any = new BotClient({
+	intents: [GatewayIntentBits.Guilds],
+});
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, "commands");

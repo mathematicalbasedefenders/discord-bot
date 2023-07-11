@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
@@ -86,8 +86,8 @@ module.exports = {
 				.setMaxLength(20)
 				.setMinLength(3)
 		),
-	async execute(interaction: any) {
-		const username = interaction.options.getString("username");
+	async execute(interaction: ChatInputCommandInteraction) {
+		const username = interaction.options.getString("username") ?? "";
 		// test if username is valid.
 		if (!UserRegEx.test(username)) {
 			await interaction.reply(
