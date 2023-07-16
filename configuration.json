@@ -1,3 +1,4 @@
 {
-  "baseURL": "https://mathematicalbasedefenders.com/api"
+  "baseURL": "https://mathematicalbasedefenders.com/api",
+  "guilds": []
 }

@@ -33,12 +33,16 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
 // and deploy your commands!
 (async () => {
+	const pathName = path.join(__dirname, "configuration.json");
+	const configurationGuilds = JSON.parse(fs.readFileSync(pathName)).guilds;
+
 	try {
 		console.log(
 			`Started refreshing ${commands.length} application (/) commands.`
 		);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
+		// environment variables
 		const data = await rest.put(
 			Routes.applicationGuildCommands(
 				process.env.DISCORD_CLIENT_ID,
@@ -46,6 +50,16 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 			),
 			{ body: commands }
 		);
+		// configuration
+		for (const guild of configurationGuilds) {
+			await rest.put(
+				Routes.applicationGuildCommands(
+					process.env.DISCORD_CLIENT_ID,
+					guild
+				),
+				{ body: commands }
+			);
+		}
 
 		console.log(
 			`Successfully reloaded ${data.length} application (/) commands.`
