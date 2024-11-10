@@ -1,3 +1,5 @@
+// FIXME: Doesn't follow discord.js docs
+
 const { REST, Routes } = require("discord.js");
 require("dotenv").config({});
 const fs = require("node:fs");
