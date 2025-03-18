@@ -22,6 +22,7 @@ const PADDING = 4;
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
 
+const NOTO_SANS_20 = "20px Noto Sans";
 const NOTO_SANS_24 = "24px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
 
@@ -88,6 +89,7 @@ async function createUserStatisticsCanvas(
   });
 
   // TODO: Account for never played
+  // TODO: Account for global rank
   /** Insert Standard Singleplayer info here. */
   // box
   createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
@@ -101,11 +103,21 @@ async function createUserStatisticsCanvas(
   });
   // score
   writeText(ctx, {
-    text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score.toString(),
+    text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING - 12
+  });
+  // detailed stats
+  writeText(ctx, {
+    text: "Enemies Killed\nSpeed\nTime Elapsed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING
   });
 
   /** Insert Easy Singleplayer info here. */
