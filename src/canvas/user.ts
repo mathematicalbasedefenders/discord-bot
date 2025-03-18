@@ -127,7 +127,7 @@ async function createUserStatisticsCanvas(
     text: getGameDataText(data, "standard").enemies,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING,
+    x: CANVAS_WIDTH - SPACING - PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING,
     alignment: "right"
   });
@@ -135,7 +135,7 @@ async function createUserStatisticsCanvas(
     text: getGameDataText(data, "standard").speed,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING,
+    x: CANVAS_WIDTH - SPACING - PADDING,
     y:
       AVATAR_HEIGHT +
       2 * SPACING +
@@ -153,7 +153,7 @@ async function createUserStatisticsCanvas(
     text: getGameDataText(data, "standard").time,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING,
+    x: CANVAS_WIDTH - SPACING - PADDING,
     y:
       AVATAR_HEIGHT +
       2 * SPACING +
