@@ -26,6 +26,8 @@ const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 const AVATAR_WIDTH = 256;
 const AVATAR_HEIGHT = 256;
 
+const LINE_SPACING_COEFFICIENT = 1.25;
+
 async function getUserStatisticsCanvas(data: UserInterface) {
   const fileID = `${data.username}-${Date.now()}`;
   const fileName = path.join(
@@ -75,7 +77,7 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_24,
     color: BLACK,
     x: SPACING * 2 + AVATAR_WIDTH,
-    y: AVATAR_HEIGHT / 2 + 1.25 * SPACING
+    y: AVATAR_HEIGHT / 2 + LINE_SPACING_COEFFICIENT * SPACING
   });
 
   fs.writeFileSync(fileName, canvas.toBuffer());
