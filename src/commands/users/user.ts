@@ -1,4 +1,8 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+  SlashCommandStringOption
+} from "discord.js";
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
@@ -78,7 +82,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("user")
     .setDescription("Gets a user's information.")
-    .addStringOption((option) =>
+    .addStringOption((option: SlashCommandStringOption) =>
       option
         .setName("username")
         .setDescription("The user to get data of.")

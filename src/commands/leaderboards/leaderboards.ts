@@ -1,4 +1,8 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+  SlashCommandStringOption
+} from "discord.js";
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
@@ -41,7 +45,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("leaderboards")
     .setDescription("Shows the leaderboards for a Singleplayer mode.")
-    .addStringOption((option) =>
+    .addStringOption((option: SlashCommandStringOption) =>
       option
         .setName("mode")
         .setDescription("The mode to get data of.")

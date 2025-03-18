@@ -1,4 +1,8 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+  SlashCommandStringOption
+} from "discord.js";
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,7 +10,7 @@ module.exports = {
     .setDescription(
       "Sets the nickname of the bot. Must be the bot's owner to use."
     )
-    .addStringOption((option) =>
+    .addStringOption((option: SlashCommandStringOption) =>
       option
         .setName("nickname")
         .setDescription("The nickname to set the bot to.")
