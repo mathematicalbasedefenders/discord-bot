@@ -5,9 +5,10 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node .",
-    "start-and-register": "tsc && node deploy-commands.js && node .",
-    "register-and-start": "tsc && node deploy-commands.js && node ."
+    "start": "tsc && copyStaticFiles && node .",
+    "start-and-register": "tsc && copyStaticFiles && node deploy-commands.js && node .",
+    "register-and-start": "tsc && copyStaticFiles && node deploy-commands.js && node .",
+    "copyStaticFiles": "copyfiles --up 1 \"src/**/*\" -e \"**/*.ts\" dist"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/mathematicalbasedefenders/discord-bot#readme",
   "dependencies": {
     "canvas": "^3.1.0",
+    "copyfiles": "^2.4.1",
     "discord.js": "^14.18.0",
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
