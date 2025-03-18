@@ -12,7 +12,12 @@ import { UserInterface } from "../models/User";
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
 
+/**
+ * `SPACING` for non-text "margins"
+ * `PADDING` for text "margins"
+ */
 const SPACING = 32;
+const PADDING = 4;
 
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
@@ -84,7 +89,24 @@ async function createUserStatisticsCanvas(
 
   // TODO: Account for never played
   /** Insert Standard Singleplayer info here. */
+  // box
   createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
+  // mode name
+  writeText(ctx, {
+    text: "Standard Singleplayer",
+    font: NOTO_SANS_24,
+    color: BLACK,
+    x: SPACING + PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24
+  });
+  // score
+  writeText(ctx, {
+    text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score.toString(),
+    font: NOTO_SANS_72,
+    color: BLACK,
+    x: SPACING + PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING
+  });
 
   /** Insert Easy Singleplayer info here. */
   createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
