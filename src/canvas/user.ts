@@ -21,6 +21,7 @@ const NOTO_SANS_24 = "24px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
 
 const BLACK = "#000000";
+const BOX_COLOR = "#dddddd";
 
 const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 const AVATAR_WIDTH = 256;
@@ -79,6 +80,12 @@ async function createUserStatisticsCanvas(
     x: SPACING * 2 + AVATAR_WIDTH,
     y: AVATAR_HEIGHT / 2 + LINE_SPACING_COEFFICIENT * SPACING
   });
+
+  /** Insert Standard Singleplayer info here. */
+
+  /** Insert Easy Singleplayer info here. */
+
+  /** Insert Multiplier Singleplayer info here. */
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
