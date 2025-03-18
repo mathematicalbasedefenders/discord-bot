@@ -111,13 +111,22 @@ async function createUserStatisticsCanvas(
     x: SPACING + PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING - 12
   });
-  // detailed stats
+  // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed\nSpeed\nTime Elapsed",
     font: NOTO_SANS_20,
     color: BLACK,
     x: SPACING + PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING
+  });
+  // detailed stats values
+  writeText(ctx, {
+    text: getGameDataText(),
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING,
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING,
+    alignment: "right"
   });
 
   /** Insert Easy Singleplayer info here. */
@@ -155,10 +164,15 @@ function writeText(
     color: string;
     x: number;
     y: number;
+    alignment?: CanvasTextAlign;
   }
 ) {
+  if (!options.alignment) {
+    options.alignment = "left";
+  }
   ctx.fillStyle = options.color;
   ctx.font = options.font;
+  ctx.textAlign = options.alignment;
   ctx.fillText(options.text, options.x, options.y);
 }
 
