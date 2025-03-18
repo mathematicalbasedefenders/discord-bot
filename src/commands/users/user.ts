@@ -150,7 +150,7 @@ module.exports = {
       //   `${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}** ${multiString}`
       // );
 
-      const fileName = getUserStatisticsCanvas(data);
+      const fileName = await getUserStatisticsCanvas(data);
 
       await interaction.reply({ files: [fileName] });
     } catch (error: any) {

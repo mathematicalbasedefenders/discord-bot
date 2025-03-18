@@ -13,7 +13,7 @@ const HEIGHT = 1080;
 
 const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 
-function getUserStatisticsCanvas(data: any) {
+async function getUserStatisticsCanvas(data: any) {
   const fileID = `${data.username}-${Date.now()}`;
   const fileName = path.join(
     __dirname,
@@ -21,11 +21,11 @@ function getUserStatisticsCanvas(data: any) {
     "..",
     `/image-outputs/${fileID}.png`
   );
-  createUserStatisticsCanvas(data, fileName);
+  await createUserStatisticsCanvas(data, fileName);
   return fileName;
 }
 
-function createUserStatisticsCanvas(data: unknown, fileName: string) {
+async function createUserStatisticsCanvas(data: unknown, fileName: string) {
   const canvas = createCanvas(WIDTH, HEIGHT);
   const ctx = canvas.getContext("2d");
   registerFont(__dirname + "/assets/NotoSans-Regular.ttf", {
@@ -37,10 +37,11 @@ function createUserStatisticsCanvas(data: unknown, fileName: string) {
 
   createBackground(ctx);
 
+  console.log(DEFAULT_AVATAR);
+
   /** Insert avatar here. */
-  loadImage(DEFAULT_AVATAR).then((defaultAvatar) => {
-    ctx.drawImage(defaultAvatar, 32, 32, 256, 256);
-  });
+  const defaultAvatar = await loadImage(DEFAULT_AVATAR);
+  ctx.drawImage(defaultAvatar, 32, 32, 256, 256);
 
   writeText(ctx, {
     text: JSON.stringify(data),
