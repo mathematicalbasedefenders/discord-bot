@@ -75,15 +75,18 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_24,
     color: BLACK,
     x: SPACING * 2 + AVATAR_WIDTH,
-    y: AVATAR_HEIGHT / 2 + 72 + SPACING
+    y: AVATAR_HEIGHT / 2 + 2 * SPACING
   });
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
 }
 
-function getInformationText(data) {
-  const level = data.level;
+function getInformationText(data: UserInterface) {
+  const level = getLevel(data.statistics.totalExperiencePoints);
+  const joined = formatDate(new Date(data.creationDateAndTime).toISOString());
+  const toNext = (level.progressToNext * 100).toFixed(3);
+  return `Level ${level.level} (${toNext}% to next), Joined on ${joined}.`;
 }
 
 function createBackground(ctx: CanvasRenderingContext2D) {
@@ -104,6 +107,34 @@ function writeText(
   ctx.fillStyle = options.color;
   ctx.font = options.font;
   ctx.fillText(options.text, options.x, options.y);
+}
+
+function getLevel(experiencePoints: number | undefined) {
+  if (typeof experiencePoints !== "number") {
+    return {
+      level: 0,
+      progressToNext: 0
+    };
+  }
+  let level = 0;
+  let stock = experiencePoints;
+  while (stock > 100 * 1.1 ** level) {
+    stock -= 100 * 1.1 ** level;
+    level++;
+  }
+  return {
+    level: level,
+    progressToNext: stock / (100 * 1.1 ** level + 1)
+  };
+}
+
+function formatDate(ISODate: string) {
+  const dateObject = new Date(ISODate);
+  return dateObject.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
 }
 
 export { getUserStatisticsCanvas };
