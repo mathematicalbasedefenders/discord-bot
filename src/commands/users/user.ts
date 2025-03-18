@@ -6,6 +6,7 @@ import {
 import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
+import { getUserStatisticsCanvas } from "../../canvas/user";
 
 const UserRegEx = /^[0-9a-zA-Z_]+$/;
 const months = [
@@ -145,9 +146,13 @@ module.exports = {
       const multiString =
         typeof winRatio === "number" ? `(${multiWins}/${multiPlays})` : "";
       // there is data, now parse it
-      await interaction.reply(
-        `${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}** ${multiString}`
-      );
+      // await interaction.reply(
+      //   `${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}** ${multiString}`
+      // );
+
+      const fileName = getUserStatisticsCanvas(data);
+
+      await interaction.reply({ files: [fileName] });
     } catch (error: any) {
       await interaction.reply("An error occurred while looking up user data.");
       log.error("An error occurred while looking up user data.");
