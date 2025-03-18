@@ -146,7 +146,7 @@ async function createUserStatisticsCanvas(
       24 +
       PADDING +
       20 +
-      20,
+      8,
     alignment: "right"
   });
   writeText(ctx, {
@@ -164,7 +164,7 @@ async function createUserStatisticsCanvas(
       24 +
       PADDING +
       40 +
-      20,
+      16,
     alignment: "right"
   });
 
