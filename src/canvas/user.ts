@@ -266,7 +266,7 @@ function getGameDataText(data: UserInterface, mode: "easy" | "standard") {
   }
   const result = {
     enemies: `${enemiesKilled}`,
-    speed: `${speed}APM`,
+    speed: `${speed.toFixed(3)}APM`,
     time: `${millisecondsToTime(time)}`
   };
   return result;
