@@ -22,6 +22,7 @@ const NOTO_SANS_72 = "72px Noto Sans";
 
 const BLACK = "#000000";
 const BOX_COLOR = "#dddddd";
+const BACKGROUND_COLOR = "#eeeeee";
 
 const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 const AVATAR_WIDTH = 256;
@@ -99,8 +100,13 @@ function getInformationText(data: UserInterface) {
 }
 
 function createBackground(ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = "#eeeeee";
+  ctx.fillStyle = BACKGROUND_COLOR;
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+function createBox(ctx: CanvasRenderingContext2D, x: number, y: number) {
+  ctx.fillStyle = BOX_COLOR;
+  ctx.fillRect(x, y, SECTION_BOX_WIDTH, SECTION_BOX_HEIGHT);
 }
 
 function writeText(
