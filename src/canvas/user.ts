@@ -7,6 +7,7 @@ import {
 import fs from "fs";
 import path from "path";
 import { log } from "../log";
+import { UserInterface } from "../models/User";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
@@ -37,7 +38,10 @@ async function getUserStatisticsCanvas(data: any) {
   return fileName;
 }
 
-async function createUserStatisticsCanvas(data: unknown, fileName: string) {
+async function createUserStatisticsCanvas(
+  data: UserInterface,
+  fileName: string
+) {
   const canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   const ctx = canvas.getContext("2d");
   registerFont(__dirname + "/assets/NotoSans-Regular.ttf", {
@@ -76,6 +80,10 @@ async function createUserStatisticsCanvas(data: unknown, fileName: string) {
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
+}
+
+function getInformationText(data) {
+  const level = data.level;
 }
 
 function createBackground(ctx: CanvasRenderingContext2D) {
