@@ -18,6 +18,7 @@ const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
 
 const NOTO_SANS_24 = "24px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
+
 const BLACK = "#000000";
 
 const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
@@ -62,6 +63,15 @@ async function createUserStatisticsCanvas(data: unknown, fileName: string) {
     color: BLACK,
     x: SPACING * 2 + AVATAR_WIDTH,
     y: AVATAR_HEIGHT / 2
+  });
+
+  /** Insert general info here. */
+  writeText(ctx, {
+    text: getInformationText(data),
+    font: NOTO_SANS_24,
+    color: BLACK,
+    x: SPACING * 2 + AVATAR_WIDTH,
+    y: AVATAR_HEIGHT / 2 + 72 + SPACING
   });
 
   fs.writeFileSync(fileName, canvas.toBuffer());
