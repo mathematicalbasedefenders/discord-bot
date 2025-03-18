@@ -62,7 +62,7 @@ async function createUserStatisticsCanvas(
    * TODO: Colored names for ranks
    */
   writeText(ctx, {
-    text: JSON.stringify(data),
+    text: data.username,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING * 2 + AVATAR_WIDTH,
