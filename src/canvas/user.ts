@@ -1,10 +1,17 @@
-import { CanvasRenderingContext2D, createCanvas, registerFont } from "canvas";
+import {
+  CanvasRenderingContext2D,
+  createCanvas,
+  loadImage,
+  registerFont
+} from "canvas";
 import fs from "fs";
 import path from "path";
 import { log } from "../log";
 
 const WIDTH = 1080;
 const HEIGHT = 1080;
+
+const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 
 function getUserStatisticsCanvas(data: any) {
   const fileID = `${data.username}-${Date.now()}`;
@@ -29,6 +36,12 @@ function createUserStatisticsCanvas(data: unknown, fileName: string) {
   const BLACK = "#000000";
 
   createBackground(ctx);
+
+  /** Insert avatar here. */
+  loadImage(DEFAULT_AVATAR).then((defaultAvatar) => {
+    ctx.drawImage(defaultAvatar, 32, 32, 256, 256);
+  });
+
   writeText(ctx, {
     text: JSON.stringify(data),
     font: NOTO_SANS_24,
@@ -38,7 +51,7 @@ function createUserStatisticsCanvas(data: unknown, fileName: string) {
   });
 
   fs.writeFileSync(fileName, canvas.toBuffer());
-  log.info("Wrote file to", fileName);
+  log.info(`Wrote file to ${fileName}`);
 }
 
 function createBackground(ctx: CanvasRenderingContext2D) {
