@@ -82,11 +82,15 @@ async function createUserStatisticsCanvas(
     y: AVATAR_HEIGHT / 2 + LINE_SPACING_COEFFICIENT * SPACING
   });
 
+  // TODO: Account for never played
   /** Insert Standard Singleplayer info here. */
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
 
   /** Insert Easy Singleplayer info here. */
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
 
   /** Insert Multiplier Singleplayer info here. */
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
