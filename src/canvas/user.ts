@@ -120,6 +120,9 @@ async function createUserStatisticsCanvas(
     y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING
   });
   // detailed stats values
+  /**
+   * Since `right` alignment applies to the whole text, I have do each separately. :(
+   */
   writeText(ctx, {
     text: getGameDataText(data, "standard"),
     font: NOTO_SANS_20,
@@ -222,14 +225,19 @@ function getGameDataText(data: UserInterface, mode: "easy" | "standard") {
     enemiesKilled = standardBest.enemiesKilled;
     enemiesSpawned = standardBest.enemiesCreated;
     speed =
-      (standardBest.actionsPerformed /
-        (standardBest.timeInMilliseconds * 1000)) *
-      60;
+      (standardBest.actionsPerformed / standardBest.timeInMilliseconds) * 60000;
     time = standardBest.timeInMilliseconds;
   }
-  return `${enemiesKilled}/${enemiesSpawned}\n${speed}APM\n${millisecondsToTime(
-    time
-  )}`;
+  // return `${enemiesKilled}/${enemiesSpawned}\n${speed.toFixed(
+  //   3
+  // )}APM\n${millisecondsToTime(time)}`;
+  let result = ``;
+  result += `${enemiesKilled}`;
+  result += `\n`;
+  result += `${speed.toFixed(3)}APM`;
+  result += `\n`;
+  result += `${millisecondsToTime(time)}`;
+  return result;
 }
 
 function millisecondsToTime(milliseconds: number) {
