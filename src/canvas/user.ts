@@ -75,7 +75,7 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_24,
     color: BLACK,
     x: SPACING * 2 + AVATAR_WIDTH,
-    y: AVATAR_HEIGHT / 2 + 2 * SPACING
+    y: AVATAR_HEIGHT / 2 + 1.25 * SPACING
   });
 
   fs.writeFileSync(fileName, canvas.toBuffer());
