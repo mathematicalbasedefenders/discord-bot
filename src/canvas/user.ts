@@ -26,7 +26,7 @@ const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 const AVATAR_WIDTH = 256;
 const AVATAR_HEIGHT = 256;
 
-async function getUserStatisticsCanvas(data: any) {
+async function getUserStatisticsCanvas(data: UserInterface) {
   const fileID = `${data.username}-${Date.now()}`;
   const fileName = path.join(
     __dirname,
