@@ -136,17 +136,7 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - PADDING,
-    y:
-      AVATAR_HEIGHT +
-      2 * SPACING +
-      PADDING +
-      24 +
-      72 +
-      PADDING +
-      24 +
-      PADDING +
-      20 +
-      8,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 148,
     alignment: "right"
   });
   writeText(ctx, {
@@ -154,17 +144,7 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - PADDING,
-    y:
-      AVATAR_HEIGHT +
-      2 * SPACING +
-      PADDING +
-      24 +
-      72 +
-      PADDING +
-      24 +
-      PADDING +
-      40 +
-      16,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 176,
     alignment: "right"
   });
 
