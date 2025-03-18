@@ -8,8 +8,8 @@ import fs from "fs";
 import path from "path";
 import { log } from "../log";
 
-const WIDTH = 1080;
-const HEIGHT = 1080;
+const CANVAS_WIDTH = 1080;
+const CANVAS_HEIGHT = 1080;
 
 const DEFAULT_AVATAR = __dirname + "/assets/default-avatar.png";
 
@@ -26,7 +26,7 @@ async function getUserStatisticsCanvas(data: any) {
 }
 
 async function createUserStatisticsCanvas(data: unknown, fileName: string) {
-  const canvas = createCanvas(WIDTH, HEIGHT);
+  const canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   const ctx = canvas.getContext("2d");
   registerFont(__dirname + "/assets/NotoSans-Regular.ttf", {
     family: "Noto Sans"
@@ -57,7 +57,7 @@ async function createUserStatisticsCanvas(data: unknown, fileName: string) {
 
 function createBackground(ctx: CanvasRenderingContext2D) {
   ctx.fillStyle = "#eeeeee";
-  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
 function writeText(
