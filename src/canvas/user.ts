@@ -124,11 +124,47 @@ async function createUserStatisticsCanvas(
    * Since `right` alignment applies to the whole text, I have do each separately. :(
    */
   writeText(ctx, {
-    text: getGameDataText(data, "standard"),
+    text: getGameDataText(data, "standard").enemies,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING,
     y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING + 24 + PADDING,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").speed,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING,
+    y:
+      AVATAR_HEIGHT +
+      2 * SPACING +
+      PADDING +
+      24 +
+      72 +
+      PADDING +
+      24 +
+      PADDING +
+      20 +
+      20,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").time,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING,
+    y:
+      AVATAR_HEIGHT +
+      2 * SPACING +
+      PADDING +
+      24 +
+      72 +
+      PADDING +
+      24 +
+      PADDING +
+      40 +
+      20,
     alignment: "right"
   });
 
