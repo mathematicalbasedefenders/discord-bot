@@ -4,7 +4,7 @@ import {
   loadImage,
   registerFont
 } from "canvas";
-import fs from "fs";
+import fs, { stat } from "fs";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
@@ -121,7 +121,7 @@ async function createUserStatisticsCanvas(
   });
   // detailed stats values
   writeText(ctx, {
-    text: getGameDataText(),
+    text: getGameDataText(data, "standard"),
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING,
@@ -202,6 +202,48 @@ function formatDate(ISODate: string) {
     day: "numeric",
     year: "numeric"
   });
+}
+
+function getGameDataText(data: UserInterface, mode: "easy" | "standard") {
+  const statistics = data.statistics;
+  let enemiesKilled = 0;
+  let enemiesSpawned = 0;
+  let speed = 0;
+  let time = 0;
+  if (mode === "easy") {
+    const easyBest = statistics.personalBestScoreOnEasySingleplayerMode;
+    enemiesKilled = easyBest.enemiesKilled;
+    enemiesSpawned = easyBest.enemiesCreated;
+    speed =
+      (easyBest.actionsPerformed / (easyBest.timeInMilliseconds * 1000)) * 60;
+    time = easyBest.timeInMilliseconds;
+  } else if (mode === "standard") {
+    const standardBest = statistics.personalBestScoreOnStandardSingleplayerMode;
+    enemiesKilled = standardBest.enemiesKilled;
+    enemiesSpawned = standardBest.enemiesCreated;
+    speed =
+      (standardBest.actionsPerformed /
+        (standardBest.timeInMilliseconds * 1000)) *
+      60;
+    time = standardBest.timeInMilliseconds;
+  }
+  return `${enemiesKilled}/${enemiesSpawned}\n${speed}APM\n${millisecondsToTime(
+    time
+  )}`;
+}
+
+function millisecondsToTime(milliseconds: number) {
+  if (!Number.isFinite(milliseconds) || milliseconds < 0) {
+    log.warn("Number given is not a positive finite number.");
+  }
+  let m = Math.floor(milliseconds / 60000);
+  let s = Math.floor((milliseconds % 60000) / 1000)
+    .toString()
+    .padStart(2, "0");
+  let ms = Math.floor((milliseconds % 60000) % 1000)
+    .toString()
+    .padStart(3, "0");
+  return `${m}:${s}.${ms}`;
 }
 
 export { getUserStatisticsCanvas };
