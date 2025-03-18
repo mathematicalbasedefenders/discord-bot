@@ -228,15 +228,11 @@ function getGameDataText(data: UserInterface, mode: "easy" | "standard") {
       (standardBest.actionsPerformed / standardBest.timeInMilliseconds) * 60000;
     time = standardBest.timeInMilliseconds;
   }
-  // return `${enemiesKilled}/${enemiesSpawned}\n${speed.toFixed(
-  //   3
-  // )}APM\n${millisecondsToTime(time)}`;
-  let result = ``;
-  result += `${enemiesKilled}`;
-  result += `\n`;
-  result += `${speed.toFixed(3)}APM`;
-  result += `\n`;
-  result += `${millisecondsToTime(time)}`;
+  const result = {
+    enemies: `${enemiesKilled}`,
+    speed: `${speed}APM`,
+    time: `${millisecondsToTime(time)}`
+  };
   return result;
 }
 
