@@ -458,8 +458,7 @@ function getSingleplayerGameDataText(
     const easyBest = statistics.personalBestScoreOnEasySingleplayerMode;
     enemiesKilled = easyBest.enemiesKilled;
     enemiesSpawned = easyBest.enemiesCreated;
-    speed =
-      (easyBest.actionsPerformed / (easyBest.timeInMilliseconds * 1000)) * 60;
+    speed = (easyBest.actionsPerformed / easyBest.timeInMilliseconds) * 60000;
     time = easyBest.timeInMilliseconds;
   } else if (mode === "standard") {
     const standardBest = statistics.personalBestScoreOnStandardSingleplayerMode;
