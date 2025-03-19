@@ -109,7 +109,7 @@ async function createUserStatisticsCanvas(
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING - 12
+    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING - 6
   });
   // detailed stats labellers
   writeText(ctx, {
