@@ -318,6 +318,56 @@ function writeMultiplayerData(
       90 +
       2 * SECTION_BOX_HEIGHT
   });
+  writeText(ctx, {
+    text: "Games Won",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      4 * VERTICAL_PADDING +
+      120 +
+      2 * SECTION_BOX_HEIGHT
+  });
+  writeText(ctx, {
+    text: "Games Played",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      4 * VERTICAL_PADDING +
+      148 +
+      2 * SECTION_BOX_HEIGHT
+  });
+  writeText(ctx, {
+    text: getMultiplayerDataText(data).wins.toString(),
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      4 * VERTICAL_PADDING +
+      120 +
+      2 * SECTION_BOX_HEIGHT,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getMultiplayerDataText(data).plays.toString(),
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      4 * VERTICAL_PADDING +
+      148 +
+      2 * SECTION_BOX_HEIGHT,
+    alignment: "right"
+  });
 }
 
 function getInformationText(data: UserInterface) {
