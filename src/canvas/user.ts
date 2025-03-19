@@ -92,35 +92,6 @@ async function createUserStatisticsCanvas(
   /** Insert Standard Singleplayer info here. */
   writeStandardSingleplayerData(ctx, data);
 
-  // detailed stats values
-  /**
-   * Since `right` alignment applies to the whole text, I have do each separately. :(
-   */
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").enemies,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120,
-    alignment: "right"
-  });
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").speed,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148,
-    alignment: "right"
-  });
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").time,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
-    alignment: "right"
-  });
-
   /** Insert Easy Singleplayer info here. */
   createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
 
@@ -176,6 +147,34 @@ function writeStandardSingleplayerData(
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176
+  });
+  // detailed stats values
+  /**
+   * Since `right` alignment applies to the whole text, I have do each separately. :(
+   */
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").enemies,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").speed,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").time,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
+    alignment: "right"
   });
 }
 
