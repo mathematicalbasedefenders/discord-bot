@@ -93,7 +93,7 @@ async function createUserStatisticsCanvas(
   writeStandardSingleplayerData(ctx, data);
 
   /** Insert Easy Singleplayer info here. */
-  createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
+  writeEasySingleplayerData(ctx, data);
 
   /** Insert Multiplier Singleplayer info here. */
   createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
@@ -174,6 +174,117 @@ function writeStandardSingleplayerData(
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
+    alignment: "right"
+  });
+}
+
+// TODO: Account for never played
+// TODO: Account for global rank
+function writeEasySingleplayerData(
+  ctx: CanvasRenderingContext2D,
+  data: UserInterface
+) {
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
+  writeText(ctx, {
+    text: "Easy Singleplayer",
+    font: NOTO_SANS_24,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24
+  });
+  // score
+  writeText(ctx, {
+    text: data.statistics.personalBestScoreOnEasySingleplayerMode.score
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    font: NOTO_SANS_72,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      2 * VERTICAL_PADDING +
+      90 +
+      SECTION_BOX_HEIGHT
+  });
+  // detailed stats labellers
+  writeText(ctx, {
+    text: "Enemies Killed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      120 +
+      SECTION_BOX_HEIGHT
+  });
+  writeText(ctx, {
+    text: "Speed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      148 +
+      SECTION_BOX_HEIGHT
+  });
+  writeText(ctx, {
+    text: "Time Elapsed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      176 +
+      SECTION_BOX_HEIGHT
+  });
+  // detailed stats values
+  /**
+   * Since `right` alignment applies to the whole text, I have do each separately. :(
+   */
+  writeText(ctx, {
+    text: getGameDataText(data, "easy").enemies,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      120 +
+      SECTION_BOX_HEIGHT,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "easy").speed,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      148 +
+      SECTION_BOX_HEIGHT,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "easy").time,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      3 * SPACING +
+      3 * VERTICAL_PADDING +
+      176 +
+      SECTION_BOX_HEIGHT,
     alignment: "right"
   });
 }
