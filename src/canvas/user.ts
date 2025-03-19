@@ -73,9 +73,7 @@ async function createUserStatisticsCanvas(
   const rank = getRank(data);
   createRankBox(ctx, rank, SPACING * 2 + AVATAR_WIDTH, SPACING);
 
-  /** Insert username here.
-   * TODO: Colored names for ranks
-   */
+  /** Insert username here. */
   writeText(ctx, {
     text: data.username,
     font: NOTO_SANS_72,
