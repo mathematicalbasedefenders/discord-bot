@@ -23,6 +23,7 @@ module.exports = {
         .setMinLength(3)
     ),
   async execute(interaction: ChatInputCommandInteraction) {
+    await interaction.deferReply();
     const username = interaction.options.getString("username") ?? "";
     // test if username is valid.
     if (!UserRegEx.test(username)) {
