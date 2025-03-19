@@ -11,6 +11,7 @@ import { UserInterface } from "../models/User";
 import { formatDate } from "../utilities/date-formatting";
 import { getLevel } from "../utilities/level";
 import { millisecondsToTime } from "../utilities/time-formatting";
+import { getRank } from "../utilities/rank";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
@@ -71,6 +72,8 @@ async function createUserStatisticsCanvas(
   ctx.drawImage(defaultAvatar, SPACING, SPACING, AVATAR_WIDTH, AVATAR_HEIGHT);
 
   /** Insert rank here. */
+  const rank = getRank(data);
+  createRankBox(ctx, rank, SPACING * 2 + AVATAR_WIDTH, SPACING);
 
   /** Insert username here.
    * TODO: Colored names for ranks
@@ -493,6 +496,23 @@ function getMultiplayerDataText(data: UserInterface) {
     winRatioText: winRatioString
   };
   return result;
+}
+
+function createRankBox(
+  ctx: CanvasRenderingContext2D,
+  rank: { [key: string]: string },
+  x: number,
+  y: number
+) {
+  const RANK_BOX_WIDTH = 256;
+  const RANK_BOX_HEIGHT = 48;
+  ctx.fillStyle = rank.color;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(rank.title, (x + RANK_BOX_WIDTH) / 2, (y + RANK_BOX_HEIGHT) / 2);
+  ctx.fillRect(x, y, RANK_BOX_WIDTH, RANK_BOX_HEIGHT);
+  // set back
+  ctx.textBaseline = "alphabetic";
 }
 
 export { getUserStatisticsCanvas };
