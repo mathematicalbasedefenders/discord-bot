@@ -16,6 +16,6 @@ function getLevel(experiencePoints: number | undefined) {
   }
   return {
     level: level,
-    progressToNext: stock / (BASE * MULTIPLIER ** level + 1)
+    progressToNext: stock / (BASE * MULTIPLIER ** (level + 1))
   };
 }
