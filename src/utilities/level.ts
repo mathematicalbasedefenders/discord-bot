@@ -19,3 +19,5 @@ function getLevel(experiencePoints: number | undefined) {
     progressToNext: stock / (BASE * MULTIPLIER ** (level + 1))
   };
 }
+
+export { getLevel };
