@@ -409,7 +409,7 @@ function getInformationText(data: UserInterface) {
   const level = getLevel(data.statistics.totalExperiencePoints);
   const joined = formatDate(new Date(data.creationDateAndTime).toISOString());
   const toNext = (level.progressToNext * 100).toFixed(3);
-  return `Level ${level.level} (${toNext}% to next), Joined on ${joined}.`;
+  return `Level ${level.level} (${toNext}% to next)\nJoined on ${joined}.`;
 }
 
 function createBackground(ctx: CanvasRenderingContext2D) {
