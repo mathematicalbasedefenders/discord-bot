@@ -1,3 +1,5 @@
+import { log } from "../log";
+
 function millisecondsToTime(milliseconds: number) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) {
     log.warn("Number given is not a positive finite number.");
@@ -11,3 +13,5 @@ function millisecondsToTime(milliseconds: number) {
     .padStart(3, "0");
   return `${m}:${s}.${ms}`;
 }
+
+export { millisecondsToTime };
