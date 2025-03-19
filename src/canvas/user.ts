@@ -294,6 +294,30 @@ function writeMultiplayerData(
   data: UserInterface
 ) {
   createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
+  writeText(ctx, {
+    text: "Multiplayer",
+    font: NOTO_SANS_24,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      2 * SECTION_BOX_HEIGHT +
+      24 +
+      VERTICAL_PADDING
+  });
+  writeText(ctx, {
+    text: "",
+    font: NOTO_SANS_72,
+    color: BLACK,
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      4 * SPACING +
+      2 * VERTICAL_PADDING +
+      90 +
+      2 * SECTION_BOX_HEIGHT
+  });
 }
 
 function getInformationText(data: UserInterface) {
