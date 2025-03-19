@@ -4,7 +4,7 @@ import {
   loadImage,
   registerFont
 } from "canvas";
-import fs, { stat } from "fs";
+import fs from "fs";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
