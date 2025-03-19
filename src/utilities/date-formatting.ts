@@ -6,3 +6,5 @@ function formatDate(ISODate: string) {
     year: "numeric"
   });
 }
+
+export { formatDate };
