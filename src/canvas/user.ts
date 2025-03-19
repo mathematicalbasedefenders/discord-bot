@@ -184,13 +184,13 @@ function writeEasySingleplayerData(
   ctx: CanvasRenderingContext2D,
   data: UserInterface
 ) {
-  createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
   writeText(ctx, {
     text: "Easy Singleplayer",
     font: NOTO_SANS_24,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24
+    y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24 + VERTICAL_PADDING
   });
   // score
   writeText(ctx, {
