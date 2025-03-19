@@ -89,12 +89,55 @@ async function createUserStatisticsCanvas(
     y: AVATAR_HEIGHT / 2 + LINE_SPACING_COEFFICIENT * SPACING
   });
 
-  // TODO: Account for never played
-  // TODO: Account for global rank
   /** Insert Standard Singleplayer info here. */
-  // box
+  writeStandardSingleplayerData(ctx, data);
+
+  // detailed stats values
+  /**
+   * Since `right` alignment applies to the whole text, I have do each separately. :(
+   */
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").enemies,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").speed,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148,
+    alignment: "right"
+  });
+  writeText(ctx, {
+    text: getGameDataText(data, "standard").time,
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
+    alignment: "right"
+  });
+
+  /** Insert Easy Singleplayer info here. */
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
+
+  /** Insert Multiplier Singleplayer info here. */
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
+
+  fs.writeFileSync(fileName, canvas.toBuffer());
+  log.info(`Wrote file to ${fileName}`);
+}
+
+// TODO: Account for never played
+// TODO: Account for global rank
+function writeStandardSingleplayerData(
+  ctx: CanvasRenderingContext2D,
+  data: UserInterface
+) {
   createBox(ctx, SPACING, AVATAR_HEIGHT + 2 * SPACING);
-  // mode name
   writeText(ctx, {
     text: "Standard Singleplayer",
     font: NOTO_SANS_24,
@@ -134,43 +177,6 @@ async function createUserStatisticsCanvas(
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176
   });
-  // detailed stats values
-  /**
-   * Since `right` alignment applies to the whole text, I have do each separately. :(
-   */
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").enemies,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120,
-    alignment: "right"
-  });
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").speed,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148,
-    alignment: "right"
-  });
-  writeText(ctx, {
-    text: getGameDataText(data, "standard").time,
-    font: NOTO_SANS_20,
-    color: BLACK,
-    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
-    alignment: "right"
-  });
-
-  /** Insert Easy Singleplayer info here. */
-  createBox(ctx, SPACING, AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT);
-
-  /** Insert Multiplier Singleplayer info here. */
-  createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
-
-  fs.writeFileSync(fileName, canvas.toBuffer());
-  log.info(`Wrote file to ${fileName}`);
 }
 
 function getInformationText(data: UserInterface) {
