@@ -1,3 +1,6 @@
+const BASE = 100;
+const MULTIPLIER = 1.1;
+
 function getLevel(experiencePoints: number | undefined) {
   if (typeof experiencePoints !== "number") {
     return {
@@ -7,12 +10,12 @@ function getLevel(experiencePoints: number | undefined) {
   }
   let level = 0;
   let stock = experiencePoints;
-  while (stock > 100 * 1.1 ** level) {
-    stock -= 100 * 1.1 ** level;
+  while (stock > BASE * MULTIPLIER ** level) {
+    stock -= BASE * MULTIPLIER ** level;
     level++;
   }
   return {
     level: level,
-    progressToNext: stock / (100 * 1.1 ** level + 1)
+    progressToNext: stock / (BASE * MULTIPLIER ** level + 1)
   };
 }
