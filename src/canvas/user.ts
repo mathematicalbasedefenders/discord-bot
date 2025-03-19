@@ -17,7 +17,8 @@ const CANVAS_HEIGHT = 1080;
  * `PADDING` for text "margins"
  */
 const SPACING = 32;
-const PADDING = 8;
+const HORIZONTAL_PADDING = 8;
+const VERTICAL_PADDING = 4;
 
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
@@ -98,8 +99,8 @@ async function createUserStatisticsCanvas(
     text: "Standard Singleplayer",
     font: NOTO_SANS_24,
     color: BLACK,
-    x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24
+    x: SPACING + HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + VERTICAL_PADDING + 24
   });
   // score
   writeText(ctx, {
@@ -108,30 +109,37 @@ async function createUserStatisticsCanvas(
       .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     font: NOTO_SANS_72,
     color: BLACK,
-    x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + PADDING + 24 + 72 + PADDING - 6
+    x: SPACING + HORIZONTAL_PADDING,
+    y:
+      AVATAR_HEIGHT +
+      2 * SPACING +
+      VERTICAL_PADDING +
+      24 +
+      72 +
+      VERTICAL_PADDING -
+      6
   });
   // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed",
     font: NOTO_SANS_20,
     color: BLACK,
-    x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 120
+    x: SPACING + HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120
   });
   writeText(ctx, {
     text: "Speed",
     font: NOTO_SANS_20,
     color: BLACK,
-    x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 148
+    x: SPACING + HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148
   });
   writeText(ctx, {
     text: "Time Elapsed",
     font: NOTO_SANS_20,
     color: BLACK,
-    x: SPACING + PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 176
+    x: SPACING + HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176
   });
   // detailed stats values
   /**
@@ -141,24 +149,24 @@ async function createUserStatisticsCanvas(
     text: getGameDataText(data, "standard").enemies,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING - PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 120,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 120,
     alignment: "right"
   });
   writeText(ctx, {
     text: getGameDataText(data, "standard").speed,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING - PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 148,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 148,
     alignment: "right"
   });
   writeText(ctx, {
     text: getGameDataText(data, "standard").time,
     font: NOTO_SANS_20,
     color: BLACK,
-    x: CANVAS_WIDTH - SPACING - PADDING,
-    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 176,
+    x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * VERTICAL_PADDING + 176,
     alignment: "right"
   });
 
