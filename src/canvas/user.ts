@@ -504,13 +504,20 @@ function createRankBox(
   x: number,
   y: number
 ) {
+  // if don't have rank, don't do anything
+  if (rank.title === "(No Rank)") {
+    return;
+  }
+
   const RANK_BOX_WIDTH = 256;
-  const RANK_BOX_HEIGHT = 48;
+  const RANK_BOX_HEIGHT = 32;
+  ctx.font = NOTO_SANS_24;
   ctx.fillStyle = rank.color;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(rank.title, (x + RANK_BOX_WIDTH) / 2, (y + RANK_BOX_HEIGHT) / 2);
   ctx.fillRect(x, y, RANK_BOX_WIDTH, RANK_BOX_HEIGHT);
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+  ctx.textBaseline = "middle";
+  ctx.fillText(rank.title, x + RANK_BOX_WIDTH / 2, y + RANK_BOX_HEIGHT / 2);
   // set back
   ctx.textBaseline = "alphabetic";
 }
