@@ -426,7 +426,9 @@ function getMultiplayerDataText(data: UserInterface) {
       ? null
       : multiplayerWins / multiplayerPlays;
   const winRatioString =
-    typeof winRatio === "number" ? `${(winRatio * 100).toFixed(3)}%` : "N/A";
+    typeof winRatio === "number"
+      ? `${(winRatio * 100).toFixed(3)}%`
+      : "(never played)";
   const result = {
     plays: multiplayerPlays,
     wins: multiplayerWins,
