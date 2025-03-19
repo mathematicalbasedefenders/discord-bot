@@ -22,3 +22,5 @@ function getRank(data: UserInterface) {
   // No rank
   return { title: "(No Rank)", color: "#eeeeee" };
 }
+
+export { getRank };
