@@ -102,7 +102,6 @@ async function createUserStatisticsCanvas(
   log.info(`Wrote file to ${fileName}`);
 }
 
-// TODO: Account for never played
 // TODO: Account for global rank
 function writeStandardSingleplayerData(
   ctx: CanvasRenderingContext2D,
@@ -193,7 +192,6 @@ function writeStandardSingleplayerData(
   });
 }
 
-// TODO: Account for never played
 // TODO: Account for global rank
 function writeEasySingleplayerData(
   ctx: CanvasRenderingContext2D,
