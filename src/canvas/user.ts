@@ -116,7 +116,12 @@ function writeStandardSingleplayerData(
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + VERTICAL_PADDING + 24
   });
-  if (!data.statistics.personalBestScoreOnStandardSingleplayerMode) {
+  if (
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.score ===
+      null ||
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.score ===
+      undefined
+  ) {
     writeText(ctx, {
       text: `(never played)`,
       font: NOTO_SANS_72,
@@ -202,7 +207,10 @@ function writeEasySingleplayerData(
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24 + VERTICAL_PADDING
   });
-  if (!data.statistics.personalBestScoreOnEasySingleplayerMode) {
+  if (
+    data.statistics.personalBestScoreOnEasySingleplayerMode.score === null ||
+    data.statistics.personalBestScoreOnEasySingleplayerMode.score === undefined
+  ) {
     // score
     writeText(ctx, {
       text: `(never played)`,
@@ -506,9 +514,9 @@ function getMultiplayerDataText(data: UserInterface) {
       ? `${(winRatio * 100).toFixed(3)}%`
       : "(never played)";
   const result = {
-    plays: multiplayerPlays,
-    wins: multiplayerWins,
-    winRatio: winRatio,
+    plays: multiplayerPlays || "0",
+    wins: multiplayerWins || "0",
+    winRatio: winRatio || "0",
     winRatioText: winRatioString
   };
   return result;
