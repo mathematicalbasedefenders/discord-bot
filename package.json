@@ -8,7 +8,8 @@
     "start": "tsc && npm run copyStaticFiles && node .",
     "start-and-register": "tsc && npm run copyStaticFiles && node deploy-commands.js && node .",
     "register-and-start": "tsc && npm run copyStaticFiles && node deploy-commands.js && node .",
-    "copyStaticFiles": "copyfiles --up 1 \"src/**/*\" -e \"**/*.ts\" dist"
+    "copyStaticFiles": "copyfiles --up 1 \"src/**/*\" -e \"**/*.ts\" dist",
+    "fix-image-output": "mkdir image-outputs"
   },
   "repository": {
     "type": "git",
