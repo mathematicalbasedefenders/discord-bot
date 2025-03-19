@@ -307,7 +307,7 @@ function writeMultiplayerData(
       VERTICAL_PADDING
   });
   writeText(ctx, {
-    text: "",
+    text: getMultiplayerDataText(data).winRatioText,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
