@@ -119,6 +119,20 @@ async function createUserStatisticsCanvas(
     x: SPACING + PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 120
   });
+  writeText(ctx, {
+    text: "Speed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 148
+  });
+  writeText(ctx, {
+    text: "Time Elapsed",
+    font: NOTO_SANS_20,
+    color: BLACK,
+    x: SPACING + PADDING,
+    y: AVATAR_HEIGHT + 2 * SPACING + 3 * PADDING + 176
+  });
   // detailed stats values
   /**
    * Since `right` alignment applies to the whole text, I have do each separately. :(
