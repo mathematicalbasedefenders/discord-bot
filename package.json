@@ -1,6 +1,6 @@
 {
   "name": "mathematicalbasedefenders-discord-bot",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0-beta",
   "description": "Does exactly what it says",
   "private": true,
   "main": "dist/index.js",
