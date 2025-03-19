@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
-import { formatDate } from "../utilities/date-formatting";
+import { formatDate, formatFooterDate } from "../utilities/date-formatting";
 import { getLevel } from "../utilities/level";
 import { millisecondsToTime } from "../utilities/time-formatting";
 import { getRank } from "../utilities/rank";
@@ -99,6 +99,9 @@ async function createUserStatisticsCanvas(
 
   /** Insert Multiplier info here. */
   writeMultiplayerData(ctx, data);
+
+  /** Insert footer here. */
+  createFooter(ctx, Date.now());
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
@@ -516,6 +519,28 @@ function createRankBox(
   ctx.fillText(rank.title, x + RANK_BOX_WIDTH / 2, y + RANK_BOX_HEIGHT / 2);
   // set back
   ctx.textBaseline = "alphabetic";
+}
+
+function createFooter(ctx: CanvasRenderingContext2D, date: number) {
+  const FOOTER_BOX_HEIGHT = 64;
+  ctx.fillStyle = "#222222";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = NOTO_SANS_24;
+  ctx.fillRect(
+    0,
+    CANVAS_HEIGHT - FOOTER_BOX_HEIGHT,
+    CANVAS_WIDTH,
+    CANVAS_HEIGHT
+  );
+  const dateObject = new Date(date);
+  let text = "";
+  text += `Data requested on ${formatFooterDate(dateObject)}`;
+  text += "\n";
+  text +=
+    "Mathematical Base Defenders by @mistertfy64 · https://mathematicalbasedefenders.com";
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText(text, CANVAS_WIDTH / 2, CANVAS_HEIGHT - FOOTER_BOX_HEIGHT / 2);
 }
 
 export { getUserStatisticsCanvas };
