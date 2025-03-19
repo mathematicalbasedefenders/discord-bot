@@ -417,6 +417,25 @@ function getSingleplayerGameDataText(
   return result;
 }
 
+function getMultiplayerDataText(data: UserInterface) {
+  const statistics = data.statistics;
+  const multiplayerWins = statistics?.multiplayer?.gamesWon;
+  const multiplayerPlays = statistics?.multiplayer?.gamesPlayed;
+  const winRatio =
+    multiplayerPlays === 0 || typeof multiplayerPlays === "undefined"
+      ? null
+      : multiplayerWins / multiplayerPlays;
+  const winRatioString =
+    typeof winRatio === "number" ? `${(winRatio * 100).toFixed(3)}%` : "N/A";
+  const result = {
+    plays: multiplayerPlays,
+    wins: multiplayerWins,
+    winRatio: winRatio,
+    winRatioText: winRatioString
+  };
+  return result;
+}
+
 function millisecondsToTime(milliseconds: number) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) {
     log.warn("Number given is not a positive finite number.");
