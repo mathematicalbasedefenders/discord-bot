@@ -28,7 +28,7 @@ module.exports = {
     const username = interaction.options.getString("username") ?? "";
     // test if username is valid.
     if (!UserRegEx.test(username)) {
-      await interaction.reply(
+      await interaction.editReply(
         `Error: Usernames may only be to 3 to 20 characters long and may only contain alphanumeric characters and/or underscores.`
       );
       return;
@@ -37,7 +37,7 @@ module.exports = {
     const response = await fetch(`${configuration.baseURL}/users/${username}`);
     const data = await response.json();
     if (!data || data === "Not Found.") {
-      await interaction.reply(
+      await interaction.editReply(
         `Error: Play data for user ${username} does not exist.\nThis is probably because there is no one with that username.`
       );
       return;
@@ -50,7 +50,9 @@ module.exports = {
       fs.unlinkSync(fileName);
       log.info(`Deleted file ${fileName}`);
     } catch (error: any) {
-      await interaction.reply("An error occurred while looking up user data.");
+      await interaction.editReply(
+        "An error occurred while looking up user data."
+      );
       log.error("An error occurred while looking up user data.");
       log.error(error.stack);
       return;
