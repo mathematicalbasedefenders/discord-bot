@@ -7,4 +7,18 @@ function formatDate(ISODate: string) {
   });
 }
 
-export { formatDate };
+function formatFooterDate(date: Date) {
+  const mdy = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+  const hms = date.toLocaleTimeString("en-US", {
+    timeZone: "UTC",
+    hour12: false,
+    timeZoneName: "short"
+  });
+  return `${mdy} ${hms}`;
+}
+
+export { formatDate, formatFooterDate };
