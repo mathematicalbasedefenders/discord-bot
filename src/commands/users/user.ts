@@ -112,46 +112,7 @@ module.exports = {
     // format data first
     // general
     try {
-      const stats = data.statistics;
-      const level = addCommas(getLevel(stats.totalExperiencePoints).level);
-      const formattedEXP = addCommas(stats.totalExperiencePoints ?? 0);
-      const joinDateString = formatJoinDate(data.creationDateAndTime);
-      const rankString = getRank(data.membership);
-      // scores - singleplayer
-      const easySingleString =
-        addCommas(stats?.personalBestScoreOnEasySingleplayerMode?.score) ??
-        "N/A";
-      const standardSingleString =
-        addCommas(stats?.personalBestScoreOnStandardSingleplayerMode?.score) ??
-        "N/A";
-      const easyRankString = stats?.personalBestScoreOnEasySingleplayerMode
-        ?.globalRank
-        ? `(#${stats?.personalBestScoreOnEasySingleplayerMode?.globalRank})`
-        : "";
-      const standardRankString = stats
-        ?.personalBestScoreOnStandardSingleplayerMode?.globalRank
-        ? `(#${stats?.personalBestScoreOnStandardSingleplayerMode?.globalRank})`
-        : "";
-      // scores - multiplayer
-      const multiWins = stats?.multiplayer?.gamesWon;
-      const multiPlays = stats?.multiplayer?.gamesPlayed;
-      const winRatio =
-        multiPlays === 0 || typeof multiPlays === "undefined"
-          ? null
-          : multiWins / multiPlays;
-      const winRatioString =
-        typeof winRatio === "number"
-          ? `${(winRatio * 100).toFixed(3)}%`
-          : "N/A";
-      const multiString =
-        typeof winRatio === "number" ? `(${multiWins}/${multiPlays})` : "";
-      // there is data, now parse it
-      // await interaction.reply(
-      //   `${rankString} **${username}** | **Play Data**\nLevel **${level}** (${formattedEXP}EXP)\nJoined **${joinDateString}**\nEZ-SP: **${easySingleString} **${easyRankString} | ST-SP: **${standardSingleString} **${standardRankString}\nMP: **${winRatioString}** ${multiString}`
-      // );
-
       const fileName = await getUserStatisticsCanvas(data);
-
       await interaction.reply({ files: [fileName] });
     } catch (error: any) {
       await interaction.reply("An error occurred while looking up user data.");
