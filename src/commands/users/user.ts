@@ -45,7 +45,7 @@ module.exports = {
     // general
     try {
       const fileName = await getUserStatisticsCanvas(data);
-      await interaction.reply({ files: [fileName] });
+      await interaction.editReply({ files: [fileName] });
     } catch (error: any) {
       await interaction.reply("An error occurred while looking up user data.");
       log.error("An error occurred while looking up user data.");
