@@ -113,7 +113,7 @@ async function createUserStatisticsCanvas(
   });
   // detailed stats labellers
   writeText(ctx, {
-    text: "Enemies Killed\nSpeed\nTime Elapsed",
+    text: "Enemies Killed",
     font: NOTO_SANS_20,
     color: BLACK,
     x: SPACING + PADDING,
