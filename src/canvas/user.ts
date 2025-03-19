@@ -116,6 +116,16 @@ function writeStandardSingleplayerData(
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + VERTICAL_PADDING + 24
   });
+  if (!data.statistics.personalBestScoreOnStandardSingleplayerMode) {
+    writeText(ctx, {
+      text: `(never played)`,
+      font: NOTO_SANS_72,
+      color: BLACK,
+      x: SPACING + HORIZONTAL_PADDING,
+      y: AVATAR_HEIGHT + 2 * SPACING + 2 * VERTICAL_PADDING + 90
+    });
+    return;
+  }
   // score
   writeText(ctx, {
     text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score
@@ -192,6 +202,22 @@ function writeEasySingleplayerData(
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24 + VERTICAL_PADDING
   });
+  if (!data.statistics.personalBestScoreOnEasySingleplayerMode) {
+    // score
+    writeText(ctx, {
+      text: `(never played)`,
+      font: NOTO_SANS_72,
+      color: BLACK,
+      x: SPACING + HORIZONTAL_PADDING,
+      y:
+        AVATAR_HEIGHT +
+        3 * SPACING +
+        2 * VERTICAL_PADDING +
+        90 +
+        SECTION_BOX_HEIGHT
+    });
+    return;
+  }
   // score
   writeText(ctx, {
     text: data.statistics.personalBestScoreOnEasySingleplayerMode.score
