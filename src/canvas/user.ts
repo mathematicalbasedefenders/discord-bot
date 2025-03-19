@@ -526,7 +526,7 @@ function createFooter(ctx: CanvasRenderingContext2D, date: number) {
   ctx.fillStyle = "#222222";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = NOTO_SANS_24;
+  ctx.font = NOTO_SANS_20;
   ctx.fillRect(
     0,
     CANVAS_HEIGHT - FOOTER_BOX_HEIGHT,
@@ -534,13 +534,20 @@ function createFooter(ctx: CanvasRenderingContext2D, date: number) {
     CANVAS_HEIGHT
   );
   const dateObject = new Date(date);
-  let text = "";
-  text += `Data requested on ${formatFooterDate(dateObject)}`;
-  text += "\n";
-  text +=
+  const timestampText = `Data requested on ${formatFooterDate(dateObject)}.`;
+  const gameText =
     "Mathematical Base Defenders by @mistertfy64 · https://mathematicalbasedefenders.com";
   ctx.fillStyle = "#ffffff";
-  ctx.fillText(text, CANVAS_WIDTH / 2, CANVAS_HEIGHT - FOOTER_BOX_HEIGHT / 2);
+  ctx.fillText(
+    timestampText,
+    CANVAS_WIDTH / 2,
+    CANVAS_HEIGHT - FOOTER_BOX_HEIGHT / 2 - 3 * VERTICAL_PADDING
+  );
+  ctx.fillText(
+    gameText,
+    CANVAS_WIDTH / 2,
+    CANVAS_HEIGHT - FOOTER_BOX_HEIGHT / 2 + 3 * VERTICAL_PADDING
+  );
 }
 
 export { getUserStatisticsCanvas };
