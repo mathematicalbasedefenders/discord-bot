@@ -79,7 +79,7 @@ async function createUserStatisticsCanvas(
   writeText(ctx, {
     text: data.username,
     font: NOTO_SANS_72,
-    color: BLACK,
+    color: rank.color,
     x: SPACING * 2 + AVATAR_WIDTH,
     y: AVATAR_HEIGHT / 2
   });
