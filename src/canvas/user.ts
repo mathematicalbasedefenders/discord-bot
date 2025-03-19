@@ -153,7 +153,7 @@ function writeStandardSingleplayerData(
    * Since `right` alignment applies to the whole text, I have do each separately. :(
    */
   writeText(ctx, {
-    text: getGameDataText(data, "standard").enemies,
+    text: getSingleplayerGameDataText(data, "standard").enemies,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -161,7 +161,7 @@ function writeStandardSingleplayerData(
     alignment: "right"
   });
   writeText(ctx, {
-    text: getGameDataText(data, "standard").speed,
+    text: getSingleplayerGameDataText(data, "standard").speed,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -169,7 +169,7 @@ function writeStandardSingleplayerData(
     alignment: "right"
   });
   writeText(ctx, {
-    text: getGameDataText(data, "standard").time,
+    text: getSingleplayerGameDataText(data, "standard").time,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -249,7 +249,7 @@ function writeEasySingleplayerData(
    * Since `right` alignment applies to the whole text, I have do each separately. :(
    */
   writeText(ctx, {
-    text: getGameDataText(data, "easy").enemies,
+    text: getSingleplayerGameDataText(data, "easy").enemies,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -262,7 +262,7 @@ function writeEasySingleplayerData(
     alignment: "right"
   });
   writeText(ctx, {
-    text: getGameDataText(data, "easy").speed,
+    text: getSingleplayerGameDataText(data, "easy").speed,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -275,7 +275,7 @@ function writeEasySingleplayerData(
     alignment: "right"
   });
   writeText(ctx, {
-    text: getGameDataText(data, "easy").time,
+    text: getSingleplayerGameDataText(data, "easy").time,
     font: NOTO_SANS_20,
     color: BLACK,
     x: CANVAS_WIDTH - SPACING - HORIZONTAL_PADDING,
@@ -385,7 +385,10 @@ function formatDate(ISODate: string) {
   });
 }
 
-function getGameDataText(data: UserInterface, mode: "easy" | "standard") {
+function getSingleplayerGameDataText(
+  data: UserInterface,
+  mode: "easy" | "standard"
+) {
   const statistics = data.statistics;
   let enemiesKilled = 0;
   let enemiesSpawned = 0;
