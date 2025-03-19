@@ -1,5 +1,3 @@
-// FIXME: Doesn't follow discord.js docs
-
 const { REST, Routes } = require("discord.js");
 require("dotenv").config({});
 const fs = require("node:fs");
@@ -46,22 +44,9 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 		// The put method is used to fully refresh all commands in the guild with the current set
 		// environment variables
 		const data = await rest.put(
-			Routes.applicationGuildCommands(
-				process.env.DISCORD_CLIENT_ID,
-				process.env.DISCORD_GUILD_ID
-			),
+			Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID),
 			{ body: commands }
 		);
-		// configuration
-		for (const guild of configurationGuilds) {
-			await rest.put(
-				Routes.applicationGuildCommands(
-					process.env.DISCORD_CLIENT_ID,
-					guild
-				),
-				{ body: commands }
-			);
-		}
 
 		console.log(
 			`Successfully reloaded ${data.length} application (/) commands.`

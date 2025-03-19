@@ -1,13 +1,15 @@
 {
   "name": "mathematicalbasedefenders-discord-bot",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0-beta",
   "description": "Does exactly what it says",
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node .",
-    "start-and-register": "tsc && node deploy-commands.js && node .",
-    "register-and-start": "tsc && node deploy-commands.js && node ."
+    "start": "tsc && npm run copyStaticFiles && node .",
+    "start-and-register": "tsc && npm run copyStaticFiles && node deploy-commands.js && node .",
+    "register-and-start": "tsc && npm run copyStaticFiles && node deploy-commands.js && node .",
+    "copyStaticFiles": "copyfiles --up 1 \"src/**/*\" -e \"**/*.ts\" dist",
+    "fix-image-output": "mkdir image-outputs"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,9 @@
   },
   "homepage": "https://github.com/mathematicalbasedefenders/discord-bot#readme",
   "dependencies": {
-    "discord.js": "^14.11.0",
+    "canvas": "^3.1.0",
+    "copyfiles": "^2.4.1",
+    "discord.js": "^14.18.0",
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.12",
