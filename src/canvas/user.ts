@@ -8,6 +8,9 @@ import fs from "fs";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
+import { formatDate } from "../utilities/date-formatting";
+import { getLevel } from "../utilities/level";
+import { millisecondsToTime } from "../utilities/time-formatting";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
