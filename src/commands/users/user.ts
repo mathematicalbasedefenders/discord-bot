@@ -7,6 +7,7 @@ import fetch from "node-fetch";
 import { configuration } from "../../configuration";
 import { log } from "../../log";
 import { getUserStatisticsCanvas } from "../../canvas/user";
+import fs from "fs";
 
 const UserRegEx = /^[0-9a-zA-Z_]+$/;
 
@@ -46,6 +47,8 @@ module.exports = {
     try {
       const fileName = await getUserStatisticsCanvas(data);
       await interaction.editReply({ files: [fileName] });
+      fs.unlinkSync(fileName);
+      log.info(`Deleted file ${fileName}`);
     } catch (error: any) {
       await interaction.reply("An error occurred while looking up user data.");
       log.error("An error occurred while looking up user data.");
