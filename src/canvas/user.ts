@@ -17,7 +17,7 @@ const CANVAS_HEIGHT = 1080;
  * `PADDING` for text "margins"
  */
 const SPACING = 32;
-const PADDING = 4;
+const PADDING = 8;
 
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
