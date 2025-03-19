@@ -71,13 +71,14 @@ async function createUserStatisticsCanvas(
 
   /** Insert rank here. */
   const rank = getRank(data);
+  const nameColor = rank.color === "#eeeeee" ? "#000000" : rank.color;
   createRankBox(ctx, rank, SPACING * 2 + AVATAR_WIDTH, SPACING);
 
   /** Insert username here. */
   writeText(ctx, {
     text: data.username,
     font: NOTO_SANS_72,
-    color: rank.color,
+    color: nameColor,
     x: SPACING * 2 + AVATAR_WIDTH,
     y: AVATAR_HEIGHT / 2
   });
