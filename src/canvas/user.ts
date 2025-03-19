@@ -95,8 +95,8 @@ async function createUserStatisticsCanvas(
   /** Insert Easy Singleplayer info here. */
   writeEasySingleplayerData(ctx, data);
 
-  /** Insert Multiplier Singleplayer info here. */
-  createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
+  /** Insert Multiplier info here. */
+  writeMultiplayerData(ctx, data);
 
   fs.writeFileSync(fileName, canvas.toBuffer());
   log.info(`Wrote file to ${fileName}`);
@@ -287,6 +287,13 @@ function writeEasySingleplayerData(
       SECTION_BOX_HEIGHT,
     alignment: "right"
   });
+}
+
+function writeMultiplayerData(
+  ctx: CanvasRenderingContext2D,
+  data: UserInterface
+) {
+  createBox(ctx, SPACING, AVATAR_HEIGHT + 4 * SPACING + 2 * SECTION_BOX_HEIGHT);
 }
 
 function getInformationText(data: UserInterface) {
