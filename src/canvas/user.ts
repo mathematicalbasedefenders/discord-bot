@@ -65,8 +65,6 @@ async function createUserStatisticsCanvas(
 
   createBackground(ctx);
 
-  console.log(DEFAULT_AVATAR);
-
   /** Insert avatar here. */
   const defaultAvatar = await loadImage(DEFAULT_AVATAR);
   ctx.drawImage(defaultAvatar, SPACING, SPACING, AVATAR_WIDTH, AVATAR_HEIGHT);
