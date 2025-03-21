@@ -27,8 +27,10 @@ const VERTICAL_PADDING = 4;
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
 
+const NOTO_SANS_16 = "16px Noto Sans";
 const NOTO_SANS_20 = "20px Noto Sans";
 const NOTO_SANS_24 = "24px Noto Sans";
+const NOTO_SANS_56 = "56px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
 
 const BLACK = "#000000";
@@ -231,10 +233,12 @@ function writeEasySingleplayerData(
     return;
   }
   // score
-  writeText(ctx, {
-    text: data.statistics.personalBestScoreOnEasySingleplayerMode.score
+  const scoreText =
+    data.statistics.personalBestScoreOnEasySingleplayerMode.score
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  writeText(ctx, {
+    text: scoreText,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
@@ -245,6 +249,24 @@ function writeEasySingleplayerData(
       90 +
       SECTION_BOX_HEIGHT
   });
+  // rank badge
+  if (
+    typeof data.statistics.personalBestScoreOnEasySingleplayerMode
+      .globalRank === "number" &&
+    data.statistics.personalBestScoreOnEasySingleplayerMode.globalRank < 100
+  ) {
+    const textMetrics = ctx.measureText(scoreText);
+    createGlobalRankBox(
+      ctx,
+      data.statistics.personalBestScoreOnEasySingleplayerMode.globalRank,
+      SPACING + HORIZONTAL_PADDING * 2 + textMetrics.actualBoundingBoxRight,
+      AVATAR_HEIGHT +
+        3 * SPACING +
+        1 * VERTICAL_PADDING +
+        90 +
+        SECTION_BOX_HEIGHT
+    );
+  }
   // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed",
@@ -519,6 +541,29 @@ function createRankBox(
   ctx.fillText(rank.title, x + RANK_BOX_WIDTH / 2, y + RANK_BOX_HEIGHT / 2);
   // set back
   ctx.textBaseline = "alphabetic";
+}
+
+function createGlobalRankBox(
+  ctx: CanvasRenderingContext2D,
+  rank: number,
+  x: number,
+  y: number
+) {
+  const color = getGlobalRankBoxColor(rank);
+}
+
+function getGlobalRankBoxColor(rank: number) {
+  if (rank === 1) {
+    return "#ffd700";
+  } else if (rank === 2) {
+    return "#c0c0c0";
+  } else if (rank === 3) {
+    return "#cd7f32";
+  } else if (rank <= 10) {
+    return "#8ba1ed";
+  } else if (rank <= 100) {
+    return "#ab93db";
+  }
 }
 
 function createFooter(ctx: CanvasRenderingContext2D, date: number) {
