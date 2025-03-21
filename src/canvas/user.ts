@@ -262,7 +262,7 @@ function writeEasySingleplayerData(
       SPACING + HORIZONTAL_PADDING * 2 + textMetrics.actualBoundingBoxRight,
       AVATAR_HEIGHT +
         3 * SPACING +
-        1 * VERTICAL_PADDING +
+        2 * VERTICAL_PADDING +
         90 +
         SECTION_BOX_HEIGHT
     );
@@ -549,7 +549,11 @@ function createGlobalRankBox(
   x: number,
   y: number
 ) {
+  const GLOBAL_RANK_BOX_WIDTH = 128;
+  const GLOBAL_RANK_BOX_HEIGHT = 72;
   const color = getGlobalRankBoxColor(rank);
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, GLOBAL_RANK_BOX_WIDTH, GLOBAL_RANK_BOX_HEIGHT);
 }
 
 function getGlobalRankBoxColor(rank: number) {
@@ -564,6 +568,8 @@ function getGlobalRankBoxColor(rank: number) {
   } else if (rank <= 100) {
     return "#ab93db";
   }
+  // no color.
+  return "#dddddd";
 }
 
 function createFooter(ctx: CanvasRenderingContext2D, date: number) {
