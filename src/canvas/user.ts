@@ -27,8 +27,10 @@ const VERTICAL_PADDING = 4;
 const SECTION_BOX_HEIGHT = 200;
 const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
 
+const NOTO_SANS_16 = "16px Noto Sans";
 const NOTO_SANS_20 = "20px Noto Sans";
 const NOTO_SANS_24 = "24px Noto Sans";
+const NOTO_SANS_48 = "48px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
 
 const BLACK = "#000000";
@@ -137,15 +139,31 @@ function writeStandardSingleplayerData(
     return;
   }
   // score
-  writeText(ctx, {
-    text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score
+  const scoreText =
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.score
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  writeText(ctx, {
+    text: scoreText,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 2 * VERTICAL_PADDING + 90
   });
+  // rank badge
+  if (
+    typeof data.statistics.personalBestScoreOnStandardSingleplayerMode
+      .globalRank === "number" &&
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.globalRank < 100
+  ) {
+    const textMetrics = ctx.measureText(scoreText);
+    createGlobalRankBox(
+      ctx,
+      data.statistics.personalBestScoreOnStandardSingleplayerMode.globalRank,
+      SPACING + HORIZONTAL_PADDING * 3 + textMetrics.actualBoundingBoxRight,
+      AVATAR_HEIGHT + 2 * SPACING + 2 * VERTICAL_PADDING + 27
+    );
+  }
   // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed",
@@ -231,10 +249,12 @@ function writeEasySingleplayerData(
     return;
   }
   // score
-  writeText(ctx, {
-    text: data.statistics.personalBestScoreOnEasySingleplayerMode.score
+  const scoreText =
+    data.statistics.personalBestScoreOnEasySingleplayerMode.score
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  writeText(ctx, {
+    text: scoreText,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
@@ -245,6 +265,24 @@ function writeEasySingleplayerData(
       90 +
       SECTION_BOX_HEIGHT
   });
+  // rank badge
+  if (
+    typeof data.statistics.personalBestScoreOnEasySingleplayerMode
+      .globalRank === "number" &&
+    data.statistics.personalBestScoreOnEasySingleplayerMode.globalRank < 100
+  ) {
+    const textMetrics = ctx.measureText(scoreText);
+    createGlobalRankBox(
+      ctx,
+      data.statistics.personalBestScoreOnEasySingleplayerMode.globalRank,
+      SPACING + HORIZONTAL_PADDING * 3 + textMetrics.actualBoundingBoxRight,
+      AVATAR_HEIGHT +
+        3 * SPACING +
+        2 * VERTICAL_PADDING +
+        SECTION_BOX_HEIGHT +
+        27
+    );
+  }
   // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed",
@@ -458,8 +496,7 @@ function getSingleplayerGameDataText(
     const easyBest = statistics.personalBestScoreOnEasySingleplayerMode;
     enemiesKilled = easyBest.enemiesKilled;
     enemiesSpawned = easyBest.enemiesCreated;
-    speed =
-      (easyBest.actionsPerformed / (easyBest.timeInMilliseconds * 1000)) * 60;
+    speed = (easyBest.actionsPerformed / easyBest.timeInMilliseconds) * 60000;
     time = easyBest.timeInMilliseconds;
   } else if (mode === "standard") {
     const standardBest = statistics.personalBestScoreOnStandardSingleplayerMode;
@@ -520,6 +557,51 @@ function createRankBox(
   ctx.fillText(rank.title, x + RANK_BOX_WIDTH / 2, y + RANK_BOX_HEIGHT / 2);
   // set back
   ctx.textBaseline = "alphabetic";
+}
+
+function createGlobalRankBox(
+  ctx: CanvasRenderingContext2D,
+  rank: number,
+  x: number,
+  y: number
+) {
+  const GLOBAL_RANK_BOX_WIDTH = 128;
+  const GLOBAL_RANK_BOX_HEIGHT = 72;
+  const color = getGlobalRankBoxColor(rank);
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, GLOBAL_RANK_BOX_WIDTH, GLOBAL_RANK_BOX_HEIGHT);
+  writeText(ctx, {
+    text: "Global",
+    color: "#000000",
+    x: x + GLOBAL_RANK_BOX_WIDTH / 2,
+    y: y + VERTICAL_PADDING + 16,
+    font: NOTO_SANS_16,
+    alignment: "center"
+  });
+  writeText(ctx, {
+    text: `#${rank}`,
+    color: "#000000",
+    x: x + GLOBAL_RANK_BOX_WIDTH / 2,
+    y: y + VERTICAL_PADDING * 2 + 56,
+    font: NOTO_SANS_48,
+    alignment: "center"
+  });
+}
+
+function getGlobalRankBoxColor(rank: number) {
+  if (rank === 1) {
+    return "#ffd700";
+  } else if (rank === 2) {
+    return "#c0c0c0";
+  } else if (rank === 3) {
+    return "#cd7f32";
+  } else if (rank <= 10) {
+    return "#8ba1ed";
+  } else if (rank <= 100) {
+    return "#ab93db";
+  }
+  // no color.
+  return "#dddddd";
 }
 
 function createFooter(ctx: CanvasRenderingContext2D, date: number) {

@@ -50,8 +50,10 @@ module.exports = {
         .setName("mode")
         .setDescription("The mode to get data of.")
         .setRequired(true)
-        .setMaxLength(20)
-        .setMinLength(3)
+        .setChoices([
+          { name: "easy", value: "easy" },
+          { name: "standard", value: "standard" }
+        ])
     ),
   async execute(interaction: ChatInputCommandInteraction) {
     const mode = interaction.options.getString("mode");
