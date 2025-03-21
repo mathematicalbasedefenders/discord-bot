@@ -51,9 +51,9 @@ module.exports = {
       log.info(`Deleted file ${fileName}`);
     } catch (error: any) {
       await interaction.editReply(
-        "An error occurred while looking up user data."
+        "An error occurred while looking up user data. Please try again. If this persists, please contact the bot's owner."
       );
-      log.error("An error occurred while looking up user data.");
+      log.error("An error occurred while looking up user data:");
       log.error(error.stack);
       return;
     }
