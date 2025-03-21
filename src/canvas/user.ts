@@ -139,15 +139,31 @@ function writeStandardSingleplayerData(
     return;
   }
   // score
-  writeText(ctx, {
-    text: data.statistics.personalBestScoreOnStandardSingleplayerMode.score
+  const scoreText =
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.score
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  writeText(ctx, {
+    text: scoreText,
     font: NOTO_SANS_72,
     color: BLACK,
     x: SPACING + HORIZONTAL_PADDING,
     y: AVATAR_HEIGHT + 2 * SPACING + 2 * VERTICAL_PADDING + 90
   });
+  // rank badge
+  if (
+    typeof data.statistics.personalBestScoreOnStandardSingleplayerMode
+      .globalRank === "number" &&
+    data.statistics.personalBestScoreOnStandardSingleplayerMode.globalRank < 100
+  ) {
+    const textMetrics = ctx.measureText(scoreText);
+    createGlobalRankBox(
+      ctx,
+      data.statistics.personalBestScoreOnStandardSingleplayerMode.globalRank,
+      SPACING + HORIZONTAL_PADDING * 3 + textMetrics.actualBoundingBoxRight,
+      AVATAR_HEIGHT + 2 * SPACING + 2 * VERTICAL_PADDING + 27
+    );
+  }
   // detailed stats labellers
   writeText(ctx, {
     text: "Enemies Killed",
