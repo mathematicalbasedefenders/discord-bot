@@ -30,7 +30,7 @@ const SECTION_BOX_WIDTH = CANVAS_WIDTH - 2 * SPACING;
 const NOTO_SANS_16 = "16px Noto Sans";
 const NOTO_SANS_20 = "20px Noto Sans";
 const NOTO_SANS_24 = "24px Noto Sans";
-const NOTO_SANS_56 = "56px Noto Sans";
+const NOTO_SANS_48 = "48px Noto Sans";
 const NOTO_SANS_72 = "72px Noto Sans";
 
 const BLACK = "#000000";
@@ -259,12 +259,12 @@ function writeEasySingleplayerData(
     createGlobalRankBox(
       ctx,
       data.statistics.personalBestScoreOnEasySingleplayerMode.globalRank,
-      SPACING + HORIZONTAL_PADDING * 2 + textMetrics.actualBoundingBoxRight,
+      SPACING + HORIZONTAL_PADDING * 3 + textMetrics.actualBoundingBoxRight,
       AVATAR_HEIGHT +
         3 * SPACING +
         2 * VERTICAL_PADDING +
-        90 +
-        SECTION_BOX_HEIGHT
+        SECTION_BOX_HEIGHT +
+        27
     );
   }
   // detailed stats labellers
@@ -554,6 +554,22 @@ function createGlobalRankBox(
   const color = getGlobalRankBoxColor(rank);
   ctx.fillStyle = color;
   ctx.fillRect(x, y, GLOBAL_RANK_BOX_WIDTH, GLOBAL_RANK_BOX_HEIGHT);
+  writeText(ctx, {
+    text: "Global",
+    color: "#000000",
+    x: x + GLOBAL_RANK_BOX_WIDTH / 2,
+    y: y + VERTICAL_PADDING + 16,
+    font: NOTO_SANS_16,
+    alignment: "center"
+  });
+  writeText(ctx, {
+    text: `#${rank}`,
+    color: "#000000",
+    x: x + GLOBAL_RANK_BOX_WIDTH / 2,
+    y: y + VERTICAL_PADDING * 2 + 56,
+    font: NOTO_SANS_48,
+    alignment: "center"
+  });
 }
 
 function getGlobalRankBoxColor(rank: number) {
