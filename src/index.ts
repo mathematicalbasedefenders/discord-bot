@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import {
+  ActivityType,
   ChatInputCommandInteraction,
   Client,
   Collection,
@@ -51,6 +52,15 @@ client.once(Events.ClientReady, (event: any) => {
   log.info(
     `Logged in as ${event.user.tag} with base url ${configuration.baseURL}`
   );
+
+  client.user.setPresence({
+    activities: [
+      {
+        name: `Mathematical Base Defenders`,
+        type: ActivityType.Watching
+      }
+    ]
+  });
 });
 
 client.on(
