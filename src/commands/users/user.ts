@@ -36,7 +36,7 @@ module.exports = {
     // test if there is data
     const response = await fetch(`${configuration.baseURL}/users/${username}`);
     const data = await response.json();
-    if (!data || data === "Not Found.") {
+    if (!data || !data.success) {
       await interaction.editReply(
         `Error: Play data for user ${username} does not exist.\nThis is probably because there is no one with that username.`
       );
@@ -45,7 +45,7 @@ module.exports = {
     // format data first
     // general
     try {
-      const fileName = await getUserStatisticsCanvas(data);
+      const fileName = await getUserStatisticsCanvas(data.data);
       await interaction.editReply({ files: [fileName] });
       fs.unlinkSync(fileName);
       log.info(`Deleted file ${fileName}`);
