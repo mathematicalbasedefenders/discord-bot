@@ -16,7 +16,7 @@ function addCommas(x: any) {
 }
 
 function formatLeaderboardsString(data: any, mode: string) {
-  let rankPadding = data.length >= 10 ? 1 : 0;
+  let rankPadding = data.length >= 10 ? 3 : 2;
   let usernamePadding = data
     .map((element: any) => element.username.length)
     .reduce((a: number, b: number) => Math.max(a, b), -Infinity);
@@ -68,7 +68,13 @@ module.exports = {
     const response = await fetch(
       `${configuration.baseURL}/leaderboards/${mode}`
     );
-    const data = await response.json();
+    if (!response || !response.ok) {
+      await interaction.editReply(
+        "An error occurred while looking up leaderboards. Please try again. If this persists, please contact the bot's owner."
+      );
+    }
+    const responseJSON = await response.json();
+    const data = responseJSON.data;
     // check if there is no one
     if (data.length === 0) {
       await interaction.reply(`There is currently no one on the leaderboards.`);
