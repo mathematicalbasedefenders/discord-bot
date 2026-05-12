@@ -4,7 +4,7 @@ import {
   loadImage,
   registerFont
 } from "canvas";
-import fs from "fs";
+import { writeFile } from "node:fs/promises";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
@@ -106,7 +106,9 @@ async function createUserStatisticsCanvas(
   /** Insert footer here. */
   createFooter(ctx, Date.now());
 
-  fs.writeFileSync(fileName, canvas.toBuffer());
+  const buffer = new Uint8Array( canvas.toBuffer("image/png"));
+
+  await writeFile(fileName,buffer);
   log.info(`Wrote file to ${fileName}`);
 }
 
