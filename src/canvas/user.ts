@@ -4,7 +4,7 @@ import {
   loadImage,
   registerFont
 } from "canvas";
-import fs from "fs";
+import { writeFile } from "node:fs/promises";
 import path from "path";
 import { log } from "../log";
 import { UserInterface } from "../models/User";
@@ -106,7 +106,9 @@ async function createUserStatisticsCanvas(
   /** Insert footer here. */
   createFooter(ctx, Date.now());
 
-  fs.writeFileSync(fileName, canvas.toBuffer());
+  const buffer = new Uint8Array(canvas.toBuffer("image/png"));
+
+  await writeFile(fileName, buffer);
   log.info(`Wrote file to ${fileName}`);
 }
 
@@ -124,9 +126,9 @@ function writeStandardSingleplayerData(
     y: AVATAR_HEIGHT + 2 * SPACING + VERTICAL_PADDING + 24
   });
   if (
-    data.statistics.personalBestScoreOnStandardSingleplayerMode.score ===
+    data?.statistics?.personalBestScoreOnStandardSingleplayerMode?.score ===
       null ||
-    data.statistics.personalBestScoreOnStandardSingleplayerMode.score ===
+    data?.statistics?.personalBestScoreOnStandardSingleplayerMode?.score ===
       undefined
   ) {
     writeText(ctx, {
@@ -230,8 +232,9 @@ function writeEasySingleplayerData(
     y: AVATAR_HEIGHT + 3 * SPACING + SECTION_BOX_HEIGHT + 24 + VERTICAL_PADDING
   });
   if (
-    data.statistics.personalBestScoreOnEasySingleplayerMode.score === null ||
-    data.statistics.personalBestScoreOnEasySingleplayerMode.score === undefined
+    data?.statistics?.personalBestScoreOnEasySingleplayerMode?.score === null ||
+    data?.statistics?.personalBestScoreOnEasySingleplayerMode?.score ===
+      undefined
   ) {
     // score
     writeText(ctx, {
