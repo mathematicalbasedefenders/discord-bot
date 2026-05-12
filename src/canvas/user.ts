@@ -106,9 +106,9 @@ async function createUserStatisticsCanvas(
   /** Insert footer here. */
   createFooter(ctx, Date.now());
 
-  const buffer = new Uint8Array( canvas.toBuffer("image/png"));
+  const buffer = new Uint8Array(canvas.toBuffer("image/png"));
 
-  await writeFile(fileName,buffer);
+  await writeFile(fileName, buffer);
   log.info(`Wrote file to ${fileName}`);
 }
 
@@ -233,8 +233,9 @@ function writeEasySingleplayerData(
   });
   if (
     data?.statistics?.personalBestScoreOnEasySingleplayerMode?.score === null ||
-    data?.statistics?.personalBestScoreOnEasySingleplayerMode?.score === undefined
-  ) { 
+    data?.statistics?.personalBestScoreOnEasySingleplayerMode?.score ===
+      undefined
+  ) {
     // score
     writeText(ctx, {
       text: `(never played)`,
